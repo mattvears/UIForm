@@ -1,0 +1,27 @@
+B0;136;0c<html>
+  <head>
+    <title>survey list</title>
+    <link rel="stylesheet" type="text/css" href="http://beta.confusiontechnology.com/survey.css">
+  </head>
+  <body>
+    <div class='wrap'>
+    {% if user.is_authenticated %}
+     <p>Logged in as: <b>{{ user.username }}</b> (<a href="/accounts/logout/">log out</a>)</p>
+    {% else %}
+     <a href="/accounts/login/">log in</a>
+    {% endif %}
+
+    <h1>All UIForm</h1>
+    <ul>
+    {% for survey in surveys %}
+      <li>
+        <a href='/survey/{{ survey.id }}/'>{{ survey.title }}</a>
+        {{ survey.description }}
+        <i>(created by: {{ survey.owner }})</i>
+      </li>
+    {% endfor %}
+    </ul>
+    <a href="/new/">New Survey</a>
+    </div>
+  </body>
+</html>

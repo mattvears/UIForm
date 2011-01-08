@@ -1,0 +1,103 @@
+<html>
+  <head>
+    <title>
+      {% if is_preview %}
+      (PREVIEWING) 
+      {% endif %}
+      {{ survey.title }}
+    </title>
+
+    <link rel="stylesheet" type="text/css" href="http://beta.confusiontechnology.com/survey.css">
+
+    <script type='text/javascript' 
+	    src='https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js'>
+    </script>
+
+    <script type='text/javascript'>
+      $(document).ready(function() {
+        $('.num').change(function() {
+         var inp = $(this);
+         inp.val(inp.val().replace(/[^0-9]/g, ''));
+        });
+      });
+    </script>
+
+    <style>
+      .num { width: 50px; }
+    </style>
+
+
+  </head>
+  <body>
+    <div class='wrap'>
+   
+
+    {% if user.is_authenticated %}
+     <p>Logged in as: <b>{{ user.username }}</b> (<a href="/accounts/logout/">log out</a>)</p>
+    {% else %}
+     <a href="/accounts/login/">log in</a>
+    {% endif %}
+
+ <a href="/list/">back to survey list</a>
+
+    <h1>{{ survey.title }}</h1>
+    <h2>{{ survey.description }}</h2>
+    <h3>Created by: {{ survey.owner.username }}</h3>
+
+    Email survey: 
+    <form action='/email/{{ survey.id }}/' method='post'>
+      {% csrf_token %}
+      <input type='text' name='addr'>
+      <input type='submit' value='send email'>
+    </form>
+    
+    {% if is_owner %}
+    <h3>Administer:</h3>
+    <a href="/add_question/{{ survey.id }}/">Add a question</a><br/>
+    <a href="/preview/{{ survey.id }}/" target="_blank">Preview Survey</a><br/>
+
+    <h3>Questions:</h3>
+    <ul>
+    {% for question in questions %}
+     <li> <b>id:</b> {{ question.id }} <br/>
+          <b>datatype:</b> {{ question.datatype }} <br/>
+          <b>text:</b> {{ question.text }}
+    {% endfor %}
+    </ul>
+    {% else %}
+
+    <form action='/answer/{{ survey.id }}/' method='post'>
+      {% csrf_token %}
+
+    <h3>Questions:</h3>
+    {% for question in questions %}
+    <p>
+      <b>{{ question.text }}</b>
+
+      {% if question.datatype == 0 %}
+        <input name='{{ question.id }}' type='checkbox' />
+	{% else %}
+	<input name='{{ question.id }}' type='text' class='num'/>
+	{% endif %}
+	
+    </p>
+    {% endfor %}
+
+    {% if user.is_authenticated %}
+     {% if is_preview %}
+       you are previewing.       
+     {% else %}
+      <input type="submit">
+
+     {% endif %}
+    {% else %}
+    <a href="/accounts/login/">log in to vote!</a>
+    {% endif %}
+
+    </form>
+    {% endif %}
+
+    </div>
+  </body>
+</html>
+    

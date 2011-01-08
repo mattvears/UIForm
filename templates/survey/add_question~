@@ -1,0 +1,13 @@
+<html>	
+	<head>
+		<title>Add a question</title>
+	</head>
+	<body>
+
+    <form action='/new/' method='post'>
+    {% csrf_token %}
+    
+    </form>
+
+	</body>
+</html>

@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <title>
+      New UIForm
+    </title>
+        <link rel="stylesheet" type="text/css" href="http://beta.confusiontechnology.com/survey.css">
+  </head>
+  <body>
+    <div class='wrap'>
+    <h1>New UIForm</h1>
+    
+    <form action='/new/' method='post'>
+    {% csrf_token %}
+
+    <p>label: <input type='text' name='title' /></p>
+    <p>comment description:</p>
+    <textarea name='description'></textarea>
+    <p><input type='submit' value='create survey'></p>
+    </form>
+    </div>
+  </body>
+</html>
+    

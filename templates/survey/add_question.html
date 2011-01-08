@@ -1,0 +1,26 @@
+<html>	
+	<head>
+		<title>Add a question</title>
+		<link rel="stylesheet" type="text/css" href="http://beta.confusiontechnology.com/survey.css">
+	</head>
+	<body>
+	  <div class='wrap'>
+
+    <form action='/add_question/{{ survey_id }}/' method='post'>
+    {% csrf_token %}
+      <h1>Add a question:</h1>
+      question text: <br/>
+      <textarea name='text'></textarea>
+      <br/><br/>
+      question type: <br/>
+      <select name='datatype'>
+	<option value=0>boolean</option>
+	<option value=1>integer</option>
+      </select>
+      <input type='submit'>
+    </form>
+
+
+            </div>
+	</body>
+</html>

@@ -1,0 +1,7 @@
+{% block AUTH %}
+    {% if user %}
+     <p>Logged in as: <b>{{ user.username }}</b> (<a href="/accounts/logout/">log out</a>)</p>
+    {% else %}
+     <a href="/accounts/login/">log in</a>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,22 @@
+<html>	
+	<head>
+		<title>Add a question</title>
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed leo eget lorem lobortis. 
+	</head>
+	<body>
+
+    <form action='/add_question/{{ survey_id }}/' method='post'>
+    {% csrf_token %}
+      question text: <br/>
+      <textarea name='text'></textarea>
+      <br/><br/>
+      question type: <br/>
+      <select name='datatype'>
+	<option value=0>boolean</option>
+	<option value=1>integer</option>
+      </select>
+      <input type='submit'>
+    </form>
+
+	</body>
+</html>

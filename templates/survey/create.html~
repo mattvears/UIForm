@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <title>
+      New Survey
+    </title>
+  </head>
+  <body>
+
+    <h1>New Survey</h1>
+    
+    <form action='/new/' method='post'>
+    {% csrf_token %}
+
+    <p>title: <input type='text' name='title' /></p>
+    <p>description:</p>
+    <textarea name='description'></textarea>
+    <p><input type='submit' value='create survey'></p>
+    </form>
+  </body>
+</html>
+    
